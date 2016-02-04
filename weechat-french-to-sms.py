@@ -22,6 +22,7 @@ def sms_cb(data, buffer, args):
     result = [ e for e in the_page.splitlines() if 'result' in e ][0]
     result = re.sub('.*id=\'result\'> *', '', result)
     result = re.sub(' *</div>.*', '', result)
+    result = re.sub('<img src="img/smile_sad.gif" alt=":\(">', ':(', result)
     # Decode, unescape, reencode
     result = HTMLParser.HTMLParser().unescape(result.decode('utf-8'))
     answer = result.encode('utf-8')
