@@ -19,8 +19,9 @@ def sms_cb(data, buffer, args):
     req = urllib2.Request(url, params)
     the_page = urllib2.urlopen(req).read()
     # Parse answer page (why not an API that answers in json :( )
-    result = [ e for e in the_page.splitlines() if 'result' in e ][0]
-    result = re.sub('.*id=\'result\'> *', '', result)
+    result = [ e for e in the_page.splitlines() if 'resultat' in e ][0]
+    result = re.sub('.*id=\'resultat\'[^>]*>', '', result)
+    result = re.sub('</textarea>', '', result)
     result = re.sub(' *</div>.*', '', result)
     result = re.sub('<img src="img/smile_sad.gif" alt=":\(">', ':(', result)
     # Decode, unescape, reencode
